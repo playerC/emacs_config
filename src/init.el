@@ -173,3 +173,55 @@
  '(font-lock-property-use-face ((t (:inherit nil))))
  '(font-lock-variable-use-face ((t (:inherit nil))))
  );;~ custom
+
+;;== Add project-new-c function
+;;
+;; Use `M-x project-new-c' to copy template files to current dir.
+;;
+
+(defconst my/clang-format-yaml
+  (expand-file-name "clang-format.yaml" user-emacs-directory))
+(defconst my/clangd-yaml
+  (expand-file-name "clangd.yaml" user-emacs-directory))
+
+(defconst my/trg-cf-file ".clang-format")
+(defconst my/trg-cl-file ".clangd")
+
+(defun project-new-c ()
+  "Copy clang-format and clangd config file template to current dir."
+  (interactive)
+  (let
+      (trg-dir trg-cf-file trg-cl-file)
+    
+    (unless
+	(and
+	 (file-exists-p my/clang-format-yaml)
+	 (file-exists-p my/clangd-yaml)
+	 );;~ and
+      (user-error "Template file missing, abort.")
+      );;~ unless
+    
+    (setq trg-dir (or (and (buffer-file-name)
+                           (file-name-directory (buffer-file-name)))
+                      default-directory))
+    
+    (setq trg-cf-file
+	  (expand-file-name
+	   (file-name-nondirectory my/trg-cf-file) trg-dir))
+    (setq trg-cl-file
+	  (expand-file-name
+	   (file-name-nondirectory my/trg-cl-file) trg-dir))
+
+    (when
+	(or
+	 (file-exists-p trg-cf-file)
+	 (file-exists-p trg-cl-file)
+	 )
+      (user-error "File has exits in current dir, abort.")
+      );;~ when
+
+    (copy-file my/clang-format-yaml trg-cf-file t )
+    (copy-file my/clangd-yaml trg-cl-file t )
+    (message "Clang files has copied to current dir.")
+    );;~ let
+  );;~ defun

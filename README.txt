@@ -69,5 +69,18 @@ Copyright (c) 2026 playerc@msn.cn
 复制 `src/init.el` 到 `~/.emacs.d/init.el` 即可.
 
 Copy `src/init.el` to `~/.emacs.d/init.el` , done.
-  
-:~ EOF  
+
+其他 Other
+==========
+
+* `pipe.sh` 提供了复制相关文件到 `~/.emacs.d` 的功能,使用前请检查其中的代码.
+* `init.el` 中提供了 `project-new-c` 函数, 可以通过 `M-x` 在 GNU Emacs 中
+  调用, 它会复制模板文件到当前文件所在的目录, 你可以根据需要修改它们.
+
+* `pipe.sh` provides functionality to copy relevant files to
+  `~/.emacs.d`. Please review the code before use.
+* `init.el` provides the `project-new-c` function, which can be invoked
+  via `M-x` in GNU Emacs. It copies template files to the directory of the
+  current file; you may modify them as needed.
+
+:~ EOF

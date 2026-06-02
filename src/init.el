@@ -70,6 +70,7 @@
 ;; setup mode use ON/OFF
 ;; ON
 (which-key-mode ON)
+(which-function-mode ON)
 
 ;; OFF
 

@@ -1,6 +1,5 @@
-##############
- emacs_config
-##############
+emacs_config
+============
 
 一个简单的支持C语言的 GNU Emacs 配置.
 
@@ -24,26 +23,26 @@ Copyright (c) 2026 playerc@msn.cn
 ==============
 
 1. 显示相对行号.
-#. 显示行宽指示器.
-#. 添加行间距.
-#. 启用符号配对.
-#. 启用选中区域大写转换.
-#. 启用Tree-sitter-c,c++ 支持.
-#. 启用保存时格式化代码.
-#. 8空格缩进.
-#. BSD 缩进风格.
-#. 数字和运算符高亮.
+2. 显示行宽指示器.
+3. 添加行间距.
+4. 启用符号配对.
+5. 启用选中区域大写转换.
+6. 启用Tree-sitter-c,c++ 支持.
+7. 启用保存时格式化代码.
+8. 8空格缩进.
+9. BSD 缩进风格.
+10. 数字和运算符高亮.
 
 1. Display relative line numbers.
-#. Display fill column indicator.
-#. Add line spacing.
-#. Enable symbol pairing.
-#. Enable region case conversion.
-#. Enable Tree-sitter C/C++ support.
-#. Enable format on save.
-#. 8-space indentation.
-#. BSD indentation style.
-#. Highlight numbers and operators.
+2. Display fill column indicator.
+3. Add line spacing.
+4. Enable symbol pairing.
+5. Enable region case conversion.
+6. Enable Tree-sitter C/C++ support.
+7. Enable format on save.
+8. 8-space indentation.
+9. BSD indentation style.
+10. Highlight numbers and operators.
       
 安装依赖 Install dependencies
 =============================

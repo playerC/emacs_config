@@ -38,24 +38,28 @@
 (defconst OFF -1 "mod off value")
 (defconst ON 1 "mod on value")
 
-;;== save emacs edit to other file.
+;; save emacs edit to other file.
+;; ------------------------------------------------------------------
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file :no-error :no-message))
 
-;;== setup native-comp
+(add-to-list 'custom-theme-load-path
+	     (expand-file-name "themes/" user-emacs-directory))
 
+;; setup native-comp
+;; ------------------------------------------------------------------
 ;; there are some issue on `native-compile` .
 
 ;;(setq native-comp-verbose 0)
 ;;(setq byte-compile-debug 0)
 ;;(setq native-comp-debug 0)
 ;;(setq native-comp-jit-compilation t)
-;;=== set debug flag makes it not crash
 ;;(setq native-comp-driver-options '("-g3 -lsetjmp") )
 
-;;== setup globle ui.
+;; setup globle ui.
+;; ------------------------------------------------------------------
 
 ;; set vars use ON/nil
 (setq display-line-numbers-grow-only ON)
@@ -79,21 +83,24 @@
 (tool-bar-mode OFF)
 (menu-bar-mode OFF)
 
-;;== setup text layout
+;; setup text layout
+;; ------------------------------------------------------------------
 
 (setq-default line-spacing 1)
 
 ;;(global-whitespace-mode ON)
 
-;;== setup text functions
+;; setup text functions
+;; ------------------------------------------------------------------
 
 (electric-pair-mode ON)
 
-;;=== enable upcase-region.
+;; enable upcase-region.
 
 (put 'upcase-region 'disabled nil)
 
-;;== c-ts-mode
+;; c-ts-mode
+;; ------------------------------------------------------------------
 
 (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
 (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
@@ -105,12 +112,16 @@
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
 
-;;== setup eglot(lsp)
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; setup eglot(lsp)
+;; ------------------------------------------------------------------
 
 (add-hook 'c-ts-mode-hook #'eglot-ensure)
 (add-hook 'c++-ts-mode-hook #'eglot-ensure)
 
-;;=== set eglot format on save.
+;; set eglot format on save.
 
 (defun my/eglot-mm-hook ()
   "format source code on save."
@@ -123,18 +134,20 @@
           #'my/eglot-mm-hook
 	  );;~ add-hook
 
-;;== setup coding style
+;; setup coding style
+;; ------------------------------------------------------------------
 
 (setq-default c-ts-mode-indent-offset 8)
 (setq-default c-ts-mode-indent-style 'bsd)
 
-;;== setup color theme
+;; setup color theme
+;; ------------------------------------------------------------------
 
 (setq-default font-lock-maximum-decoration t)
 (setq-default treesit-font-lock-level 4)
 
 (custom-set-variables
- '(custom-enabled-themes '(modus-vivendi-tritanopia))
+ '(custom-enabled-themes '(modus-vivendi-c4))
  );;~ custom
 
 ;;
@@ -168,14 +181,15 @@
  ;; fix color issue.
  ;;
  '(eglot-mode-line ((t (:inherit mode-line-buffer-id ))))
- '(font-lock-number-face ((t (:inherit font-lock-builtin-face))))
+ '(font-lock-number-face ((t (:inherit font-lock-constant-face))))
  '(font-lock-operator-face ((t (:inherit font-lock-keyword-face))))
  '(font-lock-property-name-face ((t (:inherit font-lock-variable-name-face))))
  '(font-lock-property-use-face ((t (:inherit nil))))
  '(font-lock-variable-use-face ((t (:inherit nil))))
  );;~ custom
 
-;;== Add project-new-c function
+;; Add project-new-c function
+;; ------------------------------------------------------------------
 ;;
 ;; Use `M-x project-new-c' to copy template files to current dir.
 ;;

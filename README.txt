@@ -9,7 +9,7 @@ BSD-3-Clause
 Copyright (c) 2026 playerc@msn.cn
 
 特性 Feature
-============
+------------
 
 * 简单.
 * 整洁.
@@ -20,7 +20,7 @@ Copyright (c) 2026 playerc@msn.cn
 * Minamal download.
 
 功能 Functions
-==============
+--------------
 
 1. 显示相对行号.
 2. 显示行宽指示器.
@@ -32,6 +32,8 @@ Copyright (c) 2026 playerc@msn.cn
 8. 8空格缩进.
 9. BSD 缩进风格.
 10. 数字和运算符高亮.
+11. 彩虹色定界符.
+12. 自定义代码高亮主题.
 
 1. Display relative line numbers.
 2. Display fill column indicator.
@@ -43,9 +45,11 @@ Copyright (c) 2026 playerc@msn.cn
 8. 8-space indentation.
 9. BSD indentation style.
 10. Highlight numbers and operators.
-      
+11. Rainbow delimiters.
+12. Custom Code Highlighting Theme.
+    
 安装依赖 Install dependencies
-=============================
+-----------------------------
 
 * GNU Emacs.
   https://www.gnu.org/software/emacs/
@@ -61,16 +65,18 @@ Copyright (c) 2026 playerc@msn.cn
   https://github.com/tree-sitter/tree-sitter-cpp
 * 0xProto font.
   https://github.com/0xType/0xProto
+* Rainbow delimiters mode.
+  https://github.com/Fanael/rainbow-delimiters
 
 安装配置文件 Install config file
-================================
+--------------------------------
 
 复制 `src/init.el` 到 `~/.emacs.d/init.el` 即可.
 
 Copy `src/init.el` to `~/.emacs.d/init.el` , done.
 
 其他 Other
-==========
+----------
 
 * `pipe.sh` 提供了复制相关文件到 `~/.emacs.d` 的功能,使用前请检查其中的代码.
 * `init.el` 中提供了 `project-new-c` 函数, 可以通过 `M-x` 在 GNU Emacs 中

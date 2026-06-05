@@ -38,9 +38,13 @@
   (unless (and (fboundp 'require-theme)
                load-file-name
                (equal (file-name-directory load-file-name)
-                      (expand-file-name "themes/" data-directory))
-               (require-theme 'modus-themes t))
-    (require 'modus-themes))
+                      (expand-file-name "themes/" data-directory)
+		      );; equal
+	       );;and
+    
+    (require-theme 'modus-themes t)
+    (require 'modus-themes)
+    );; when
 
 ;;;###theme-autoload
   (deftheme modus-vivendi-c4

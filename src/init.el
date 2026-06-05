@@ -45,6 +45,7 @@
 (when (file-exists-p custom-file)
   (load custom-file :no-error :no-message))
 
+(setq custom-safe-themes t)
 (add-to-list 'custom-theme-load-path
 	     (expand-file-name "themes/" user-emacs-directory))
 
@@ -77,11 +78,21 @@
 (which-function-mode ON)
 
 ;; OFF
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode OFF)
+  )
 
-(scroll-bar-mode OFF)
-(tab-bar-mode OFF)
-(tool-bar-mode OFF)
-(menu-bar-mode OFF)
+(when (fboundp 'tab-bar-mode)
+  (tab-bar-mode OFF)
+  )
+
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode OFF)
+  )
+
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode OFF)
+  )
 
 ;; setup text layout
 ;; ------------------------------------------------------------------
@@ -159,7 +170,10 @@
 ;; License: SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
 ;; Copyright 2014-2025 Adobe
 ;;
-(set-fontset-font t 'han "方正黑体简体" )
+(when (fboundp 'set-fontset-font)
+  (set-fontset-font t 'han "方正黑体简体" )
+  )
+
 
 ;;
 ;; `0xProto NL' a developer font , with nice feature.

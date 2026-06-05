@@ -14,7 +14,7 @@ SpacesInParentheses: false
 SpacesInSquareBrackets: false       
 PointerAlignment: Right             
 
-AllowShortFunctionsOnASingleLine: None  
+AllowShortFunctionsOnASingleLine: true  
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 AllowShortBlocksOnASingleLine: Never
@@ -28,3 +28,5 @@ IncludeBlocks:   Preserve
 
 DerivePointerAlignment: false   
 ReflowComments:  true           
+
+AlwaysBreakAfterReturnType: All

@@ -156,10 +156,54 @@
 
 (setq-default font-lock-maximum-decoration t)
 (setq-default treesit-font-lock-level 4)
+(message "[%d]" treesit-font-lock-level)
 
-(custom-set-variables
- '(custom-enabled-themes '(modus-vivendi-c4))
- );;~ custom
+(defun my/face-setup ()
+  "my face-stup func."
+  (load-theme 'modus-vivendi-c4 t)
+  (custom-set-variables
+   '(custom-enabled-themes '(modus-vivendi-c4))
+   );;~ custom
+
+  ;;
+  ;; `0xProto NL' a developer font , with nice feature.
+  ;;
+  ;; Site: https://github.com/0xType/0xProto
+  ;; License: The SIL Open Font License, Version 1.1
+  ;; Copyright (c) 2026 0xType
+  ;;
+  (custom-set-faces
+   '(default ((t (:family "0xProto NL"
+			  :foundry "outline"
+			  :slant normal
+			  :weight regular
+			  :height 100
+			  :width normal
+			  ))))
+
+   ;;
+   ;; fix color issue.
+   ;;
+   '(eglot-mode-line ((t (:inherit mode-line-buffer-id ))))
+   '(font-lock-number-face ((t (:inherit font-lock-constant-face))))
+   '(font-lock-operator-face ((t (:inherit font-lock-keyword-face))))
+   '(font-lock-property-name-face ((t (:inherit font-lock-variable-name-face))))
+   '(font-lock-property-use-face ((t (:inherit nil))))
+   '(font-lock-variable-use-face ((t (:inherit nil))))
+   );;~ custom
+
+  );;~ defun
+
+(defun my/after-mff (frame)
+  "hook after mff."
+  (with-selected-frame frame
+    (my/face-setup)
+    );;~ with selected;
+  
+  );;~ defun
+
+(add-hook 'after-make-frame-functions #'my/after-mff)
+(unless (daemonp) (my/face-setup))
 
 ;;
 ;; Fallback font for zh_CN
@@ -173,34 +217,6 @@
 (when (fboundp 'set-fontset-font)
   (set-fontset-font t 'han "方正黑体简体" )
   )
-
-
-;;
-;; `0xProto NL' a developer font , with nice feature.
-;;
-;; Site: https://github.com/0xType/0xProto
-;; License: The SIL Open Font License, Version 1.1
-;; Copyright (c) 2026 0xType
-;;
-(custom-set-faces
- '(default ((t (:family "0xProto NL"
-			:foundry "outline"
-			:slant normal
-			:weight regular
-			:height 100
-			:width normal
-			))))
-
- ;;
- ;; fix color issue.
- ;;
- '(eglot-mode-line ((t (:inherit mode-line-buffer-id ))))
- '(font-lock-number-face ((t (:inherit font-lock-constant-face))))
- '(font-lock-operator-face ((t (:inherit font-lock-keyword-face))))
- '(font-lock-property-name-face ((t (:inherit font-lock-variable-name-face))))
- '(font-lock-property-use-face ((t (:inherit nil))))
- '(font-lock-variable-use-face ((t (:inherit nil))))
- );;~ custom
 
 ;; Add project-new-c function
 ;; ------------------------------------------------------------------

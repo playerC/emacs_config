@@ -43,8 +43,9 @@
 	       );;and
     
     (require-theme 'modus-themes t)
-    (require 'modus-themes)
     );; when
+
+    (require 'modus-themes)
 
 ;;;###theme-autoload
   (deftheme modus-vivendi-c4

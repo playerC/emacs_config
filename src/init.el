@@ -41,9 +41,12 @@
 ;; save emacs edit to other file.
 ;; ------------------------------------------------------------------
 
+;; custom file must load after frame created.
+
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file :no-error :no-message))
+
+;; setup custom theme dir.
+;; ------------------------------------------------------------------
 
 (setq custom-safe-themes t)
 (add-to-list 'custom-theme-load-path
@@ -75,7 +78,7 @@
 ;; setup mode use ON/OFF
 ;; ON
 (which-key-mode ON)
-(which-function-mode ON)
+;;(which-function-mode ON)
 
 ;; OFF
 (when (fboundp 'scroll-bar-mode)
@@ -123,6 +126,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-ts-mode))
 
+;;
+;; You can install this use M-x pack-ins.
+;; If you don't need this ,just comment it.
+;;
+;; But I recommend you install this, very helpful.
+;;
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
@@ -144,6 +153,15 @@
 (add-hook 'eglot-managed-mode-hook
           #'my/eglot-mm-hook
 	  );;~ add-hook
+;;
+;; NOTE: this is for test.
+;;
+(setq eglot-server-programs
+      '((c-ts-mode . ("clangd"
+		      "--offset-encoding=utf-8"
+		      "--enable-config")
+		   ));;~ c-ts-mode
+      );;~ setq
 
 ;; setup coding style
 ;; ------------------------------------------------------------------
@@ -156,10 +174,13 @@
 
 (setq-default font-lock-maximum-decoration t)
 (setq-default treesit-font-lock-level 4)
-(message "[%d]" treesit-font-lock-level)
 
 (defun my/face-setup ()
   "my face-stup func."
+  ;; load custom-file here.
+  (when (file-exists-p custom-file)
+    (load custom-file :no-error :no-message))
+
   (load-theme 'modus-vivendi-c4 t)
   (custom-set-variables
    '(custom-enabled-themes '(modus-vivendi-c4))

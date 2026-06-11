@@ -245,10 +245,10 @@
   (set-fontset-font t 'han "方正黑体简体" )
   )
 
-;; Add project-new-c function
+;; Add c4-new-clang function
 ;; ------------------------------------------------------------------
 ;;
-;; Use `M-x project-new-c' to copy template files to current dir.
+;; Use `M-x c4-new-clang' to copy template files to current dir.
 ;;
 
 (defconst my/clang-format-yaml
@@ -259,7 +259,7 @@
 (defconst my/trg-cf-file ".clang-format")
 (defconst my/trg-cl-file ".clangd")
 
-(defun project-new-c ()
+(defun c4-new-clang ()
   "Copy clang-format and clangd config file template to current dir."
   (interactive)
   (let
@@ -297,3 +297,17 @@
     (message "Clang files has copied to current dir.")
     );;~ let
   );;~ defun
+
+
+;; Add change indent size function
+;; ------------------------------------------------------------------
+
+(defun c4-indent-width (n)
+  "Set indent width easily."
+  (interactive "nIndent Width(2,4,8):")
+
+  (setq tab-width n)
+  (setq standard-indent n)
+  (setq c-basic-offset n)
+  (setq c-ts-mode-indent-offset n)
+)

@@ -66,10 +66,10 @@
 ;; ------------------------------------------------------------------
 
 ;; set vars use ON/nil
-(setq display-line-numbers-grow-only ON)
-(setq display-line-numbers-type 'relative)
+(setq-default display-line-numbers-grow-only ON)
+(setq-default display-line-numbers-type 'relative)
 (setq inhibit-startup-screen ON)
-(setq-default indent-tabs-mode OFF)
+
 
 (global-display-line-numbers-mode ON)
 (global-completion-preview-mode ON)
@@ -165,9 +165,15 @@
 
 ;; setup coding style
 ;; ------------------------------------------------------------------
+(setq-default indent-tabs-mode OFF)
 
+(setq-default tab-width 8)
+(setq-default standard-indent 8)
+
+(setq-default c-basic-offset 8)
 (setq-default c-ts-mode-indent-offset 8)
 (setq-default c-ts-mode-indent-style 'bsd)
+
 
 ;; setup color theme
 ;; ------------------------------------------------------------------

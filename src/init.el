@@ -142,11 +142,19 @@
 (add-hook 'c++-ts-mode-hook #'eglot-ensure)
 
 ;; set eglot format on save.
+(setq c4-auto-format OFF)
+
+(defun my/eglot-fb ()
+  "add switch to auto format buffer"
+  (when (equal c4-auto-format ON )
+    (eglot-format-buffer)
+    )
+  )
 
 (defun my/eglot-mm-hook ()
   "format source code on save."
   (add-hook 'before-save-hook
-	    #'eglot-format-buffer nil t
+	    #'my/eglot-fb nil t
 	    );;~ add-hook
     );;~ defun
 

@@ -1,12 +1,4 @@
+## File: .clangd
 CompileFlags:
   Add:
-    - "xc"
-    - "-std=c11"
-    - "-Wall"
-    - "-Wextra"
-    - "-Wpedantic"
     - "-I{{Your include absolute path}}"
-  Compiler: clang
-Diagnostics:
-  Suppress: [pp_file_not_found, unknown_include]
-  MissingIncludes: None

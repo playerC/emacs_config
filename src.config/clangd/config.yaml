@@ -1,0 +1,13 @@
+## File: .config/clangd/config.yaml
+## License: BSD-3-Clause
+CompileFlags:
+  Add:
+    - "-xc"
+    - "-std=c11"
+    - "-Wall"
+    - "-Wextra"
+    - "-Wpedantic"
+  # must set to llvm shiped with clangd.
+  Compiler: /usr/local/llvm22/bin/clang-22
+Documentation:
+  CommentFormat: Plaintext

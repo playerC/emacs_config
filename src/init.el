@@ -50,7 +50,7 @@
 
 (setq custom-safe-themes t)
 (add-to-list 'custom-theme-load-path
-	     (expand-file-name "themes/" user-emacs-directory))
+             (expand-file-name "themes/" user-emacs-directory))
 
 ;; setup native-comp
 ;; ------------------------------------------------------------------
@@ -69,7 +69,6 @@
 (setq-default display-line-numbers-grow-only ON)
 (setq-default display-line-numbers-type 'relative)
 (setq inhibit-startup-screen ON)
-
 
 (global-display-line-numbers-mode ON)
 (global-completion-preview-mode ON)
@@ -142,7 +141,7 @@
 (add-hook 'c++-ts-mode-hook #'eglot-ensure)
 
 ;; set eglot format on save.
-(setq c4-auto-format OFF)
+(setq c4-auto-format ON)
 
 (defun my/eglot-fb ()
   "add switch to auto format buffer"
@@ -154,34 +153,48 @@
 (defun my/eglot-mm-hook ()
   "format source code on save."
   (add-hook 'before-save-hook
-	    #'my/eglot-fb nil t
-	    );;~ add-hook
+            #'my/eglot-fb nil t
+            );;~ add-hook
     );;~ defun
 
 (add-hook 'eglot-managed-mode-hook
           #'my/eglot-mm-hook
-	  );;~ add-hook
+          );;~ add-hook
 ;;
 ;; NOTE: this is for test.
 ;;
 (setq eglot-server-programs
       '((c-ts-mode . ("clangd"
-		      "--offset-encoding=utf-8"
-		      "--enable-config")
-		   ));;~ c-ts-mode
+                      "--offset-encoding=utf-8"
+                      "--enable-config")
+                   ));;~ c-ts-mode
       );;~ setq
 
 ;; setup coding style
 ;; ------------------------------------------------------------------
-(setq-default indent-tabs-mode OFF)
+(defun c4-use-tab-indent (n)
+  "Set indent-tabs-mode use -1 to disable."
+  (interactive "n-1 to deactive:")
 
-(setq-default tab-width 8)
-(setq-default standard-indent 8)
+  (if (or (equal n nil) (equal n -1))
+      (setq-default indent-tabs-mode nil)
+    (setq-default indent-tabs-mode t)
+    )
+  )
 
-(setq-default c-basic-offset 8)
-(setq-default c-ts-mode-indent-offset 8)
+(defun c4-set-indent-tab-width (n)
+  "Set all tab with to same number."
+
+  (setq tab-width n)
+  (setq standard-indent n)
+  (setq c-basic-offset n)
+  (setq c-ts-mode-indent-offset n)
+)
+
+(c4-set-indent-tab-width 8)
+(c4-use-tab-indent OFF)
+
 (setq-default c-ts-mode-indent-style 'bsd)
-
 
 ;; setup color theme
 ;; ------------------------------------------------------------------
@@ -209,12 +222,12 @@
   ;;
   (custom-set-faces
    '(default ((t (:family "0xProto NL"
-			  :foundry "outline"
-			  :slant normal
-			  :weight regular
-			  :height 100
-			  :width normal
-			  ))))
+                          :foundry "outline"
+                          :slant normal
+                          :weight regular
+                          :height 100
+                          :width normal
+                          ))))
 
    ;;
    ;; fix color issue.
@@ -234,7 +247,7 @@
   (with-selected-frame frame
     (my/face-setup)
     );;~ with selected;
-  
+
   );;~ defun
 
 (add-hook 'after-make-frame-functions #'my/after-mff)
@@ -272,31 +285,31 @@
   (interactive)
   (let
       (trg-dir trg-cf-file trg-cl-file)
-    
+
     (unless
-	(and
-	 (file-exists-p my/clang-format-yaml)
-	 (file-exists-p my/clangd-yaml)
-	 );;~ and
+        (and
+         (file-exists-p my/clang-format-yaml)
+         (file-exists-p my/clangd-yaml)
+         );;~ and
       (user-error "Template file missing, abort.")
       );;~ unless
-    
+
     (setq trg-dir (or (and (buffer-file-name)
                            (file-name-directory (buffer-file-name)))
                       default-directory))
-    
+
     (setq trg-cf-file
-	  (expand-file-name
-	   (file-name-nondirectory my/trg-cf-file) trg-dir))
+          (expand-file-name
+           (file-name-nondirectory my/trg-cf-file) trg-dir))
     (setq trg-cl-file
-	  (expand-file-name
-	   (file-name-nondirectory my/trg-cl-file) trg-dir))
+          (expand-file-name
+           (file-name-nondirectory my/trg-cl-file) trg-dir))
 
     (when
-	(or
-	 (file-exists-p trg-cf-file)
-	 (file-exists-p trg-cl-file)
-	 )
+        (or
+         (file-exists-p trg-cf-file)
+         (file-exists-p trg-cl-file)
+         )
       (user-error "File has exits in current dir, abort.")
       );;~ when
 
@@ -306,7 +319,6 @@
     );;~ let
   );;~ defun
 
-
 ;; Add change indent size function
 ;; ------------------------------------------------------------------
 
@@ -314,8 +326,16 @@
   "Set indent width easily."
   (interactive "nIndent Width(2,4,8):")
 
-  (setq tab-width n)
-  (setq standard-indent n)
-  (setq c-basic-offset n)
-  (setq c-ts-mode-indent-offset n)
-)
+  (c4-set-indent-tab-width n)
+  (whitespace-mode t)
+  (setq c4-auto-format OFF)
+  )
+
+;; Add clean function
+;; ------------------------------------------------------------------
+(defun c4-clean ()
+  "Remove spaces and empty lines."
+  (interactive)
+
+  (whitespace-cleanup)
+  )

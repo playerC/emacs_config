@@ -172,6 +172,9 @@
 
 ;; setup coding style
 ;; ------------------------------------------------------------------
+
+(defconst my/default-tab-width 8)
+
 (defun c4-use-tab-indent (n)
   "Set indent-tabs-mode use -1 to disable."
   (interactive "n-1 to deactive:")
@@ -328,7 +331,11 @@
 
   (c4-set-indent-tab-width n)
   (whitespace-mode t)
-  (setq c4-auto-format OFF)
+
+  (if (equal n my/default-tab-width)
+      (setq c4-auto-format ON)
+      (setq c4-auto-format OFF)
+      )
   )
 
 ;; Add clean function
@@ -337,5 +344,6 @@
   "Remove spaces and empty lines."
   (interactive)
 
+  (whitespace-mode 'toggle)
   (whitespace-cleanup)
   )

@@ -9,7 +9,5 @@ CompileFlags:
     - "-Wpedantic"
   Remove:
     - "-x*"
-  # must set to llvm shiped with clangd.
-  Compiler: /usr/local/llvm22/bin/clang-22
 Documentation:
   CommentFormat: Plaintext

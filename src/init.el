@@ -347,3 +347,25 @@
   (whitespace-mode 'toggle)
   (whitespace-cleanup)
   )
+
+;; Add copy to clipboard when using ssh and mintty
+;; ------------------------------------------------------------------
+;; must add follow options to ~/.minttyrc
+;;```
+;; AllowSetSelection=yes
+;; AllowPasteSelection=yes
+;;```
+;;
+(defun c4-tty-copy (text &optional _)
+  "copy to clipboard use OSC52"
+  (let ((enc (base64-encode-string text t))
+        )
+    (send-string-to-terminal
+     (format "\e]52;c;%s\a" enc)
+     )
+   )
+  )
+
+(when (getenv "SSH_TTY")
+  (setq interprogram-cut-function #'c4-tty-copy)
+    )

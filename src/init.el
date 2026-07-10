@@ -78,6 +78,8 @@
 ;; ON
 (which-key-mode ON)
 ;;(which-function-mode ON)
+;; setup editorconfig mode
+(editorconfig-mode ON)
 
 ;; OFF
 (when (fboundp 'scroll-bar-mode)
@@ -141,7 +143,7 @@
 (add-hook 'c++-ts-mode-hook #'eglot-ensure)
 
 ;; set eglot format on save.
-(setq c4-auto-format ON)
+(setq c4-auto-format OFF)
 
 (defun my/eglot-fb ()
   "add switch to auto format buffer"

@@ -194,7 +194,7 @@
   (setq c-ts-mode-indent-offset n)
 )
 
-(c4-set-indent-tab-width 8)
+;;(c4-set-indent-tab-width 8)
 (c4-use-tab-indent OFF)
 
 (setq-default c-ts-mode-indent-style 'bsd)
